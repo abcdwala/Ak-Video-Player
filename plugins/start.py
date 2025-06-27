@@ -28,7 +28,7 @@ async def decode(base64_string):
 async def start(client, message):
     if not await checkdb.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
-        name = await client.ask(message.chat.id, "<b>🎬✨ Welcome to Ak Disk – Your Personal File Hosting Partner! ✨🎬\n\nIts 🌐 Hosting 🔗 | Sharing 📤 | Earning 💸
+        name = await client.ask(message.chat.id, "<b>🎬✨ Welcome to Ak Disk – Your Personal File Hosting Partner! ✨🎬.\n\nIts 🌐 Hosting 🔗 | Sharing 📤 | Earning 💸
 ⏳ Let’s get your account ready...
 ━━━━━━━━━━━━━━━\n\n🧾 Step 1: Business Name
 💡 Send the name you want to show on your website\nEx :- <code>Mr Ak</code></b>")
