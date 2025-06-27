@@ -28,41 +28,18 @@ async def decode(base64_string):
 async def start(client, message):
     if not await checkdb.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
-        name = await client.ask(message.chat.id, "<b>🎬✨ Welcome to Ak Disk – Your Personal File Hosting Partner! ✨🎬
-🌐 Hosting 🔗 | Sharing 📤 | Earning 💸
-⏳ Let’s get your account ready...
-━━━━━━━━━━━━━━━
-🧾 Step 1: Business Name
-💡 Send the name you want to show on your website.
-➡️ Example:\nEx :- <code>Mr Ak</code></b>")
+        name = await client.ask(message.chat.id, "<b>Welcome To Ak Disk.\n\nIts Time To Create Account On Ak Disk\n\nNow Send Me Your Business Name Which Show On Website\nEx :- <code>Me Ak</code></b>")
         if name.text:
             await db.set_name(message.from_user.id, name=name.text)
         else:
             return await message.reply("**Wrong Input Start Your Process Again By Hitting /start**")
-        link = await client.ask(message.chat.id, "<b>📢 Step 2: Telegram Channel Link
-📌 This link will appear on your site.
-✅ Correct: https://t.me/Movieupdatewithak01
-❌ Wrong: @Movieupdatewithak01</b>")
+        link = await client.ask(message.chat.id, "<b>Now Send Me Your Telegram Channel Link, Channel Link Will Show On Your Website.\n\nSend Like This <code>https://t.me/Movieupdatewithak01</code> ✅\n\nDo not send like this @Movieupdatewithak01 ❌</b>")
         if link.text and link.text.startswith(('http://', 'https://')):
             await db.set_link(message.from_user.id, link=link.text)
         else:
             return await message.reply("**Wrong Input Start Your Process Again By Hitting /start**")
         await checkdb.add_user(message.from_user.id, message.from_user.first_name)
-        return await message.reply("<b>🎉✨ BOOM! Account Created Successfully! 🎉✨
-🔐 Your files are now just a link away...
-━━━━━━━━━━━━━━━
-📂 Want Quality Options While Uploading?
-Use 🔧 /quality command before sending files.
-📤 No quality needed?
-Just send your file directly to this bot!
-━━━━━━━━━━━━━━━
-🛠️ Useful Commands:
-🔹 /account – View account details
-🔹 /update – Update your profile
-🔹 /withdraw – Withdraw earnings 💰
-━━━━━━━━━━━━━━━
-🧑‍💻 Need help? This bot is here for you 24×7!
-🚀 Start Sharing Smarter with Ak Disk!</b>")
+        return await message.reply("<b>Congratulations 🎉\n\nYour Account Created Successfully.\n\nFor Uploading File In Quality Option Use Command /quality\n\nMore Commands Are /account and /update and /withdraw\n\nFor Without Quality Option Direct Send File To Bot.</b>")
     else:
         rm = InlineKeyboardMarkup([[InlineKeyboardButton("✨ Update Channel", url="https://t.me/Movieupdatewithak01")]])
         await client.send_message(
@@ -77,7 +54,7 @@ Just send your file directly to this bot!
 async def update(client, message):
     vj = True
     if vj:
-        name = await client.ask(message.chat.id, "<b>Now Send Me Your Business Name Which Show On Website\nEx :- <code>Mr Ak</code>\n\n/cancel - cancel the process</b>")
+        name = await client.ask(message.chat.id, "<b>Now Send Me Your Business Name Which Show On Website\nEx :- <code>Me Ak</code>\n\n/cancel - cancel the process</b>")
         if name.text == "/cancel":
             return await message.reply("**Process Cancelled**")
         if name.text:
@@ -100,8 +77,8 @@ async def stream_start(client, message):
     params = {'u': user_id, 'w': str(log_msg.id), 's': str(0), 't': str(0)}
     url1 = f"{urlencode(params)}"
     link = await encode(url1)
-    encoded_url = f"{LINK_URL}?Ak={link}"
-    rm=InlineKeyboardMarkup([[InlineKeyboardButton("🖇️ Open Link", url=encoded_url)]])
+    encoded_url = f"{LINK_URL}?Tech_VJ={link}"
+    rm=InlineKeyboardMarkup([[InlineKeyboardButton(" Your Link Open", url=encoded_url)]])
     await message.reply_text(text=f"<code>{encoded_url}</code>", reply_markup=rm)
 
 @Client.on_message(filters.private & filters.command("quality"))
@@ -203,7 +180,7 @@ async def quality_link(client, message):
         params = {'u': message.from_user.id, 'w': first_id, 's': second_id, 't': third_id}
         url1 = f"{urlencode(params)}"
         link = await encode(url1)
-        encoded_url = f"{LINK_URL}?Ak={link}"
+        encoded_url = f"{LINK_URL}?Tech_VJ={link}"
         rm=InlineKeyboardMarkup([[InlineKeyboardButton("🖇️ Open Link", url=encoded_url)]])
         return await message.reply_text(text=f"<code>{encoded_url}</code>", reply_markup=rm)
     else:
@@ -212,7 +189,7 @@ async def quality_link(client, message):
     params = {'u': message.from_user.id, 'w': first_id, 's': second_id, 't': third_id}
     url1 = f"{urlencode(params)}"
     link = await encode(url1)
-    encoded_url = f"{LINK_URL}?Ak={link}"
+    encoded_url = f"{LINK_URL}?Tech_VJ={link}"
     rm=InlineKeyboardMarkup([[InlineKeyboardButton("🖇️ Open Link", url=encoded_url)]])
     await message.reply_text(text=f"<code>{encoded_url}</code>", reply_markup=rm)
 
@@ -238,7 +215,7 @@ async def link_start(client, message):
     params = {'u': message.from_user.id, 'w': str(id), 's': str(sec), 't': str(th)}
     url1 = f"{urlencode(params)}"
     link = await encode(url1)
-    encoded_url = f"{LINK_URL}?Ak={link}"
+    encoded_url = f"{LINK_URL}?Tech_VJ={link}"
     rm=InlineKeyboardMarkup([[InlineKeyboardButton("🖇️ Open Link", url=encoded_url)]])
     await message.reply_text(text=f"<code>{encoded_url}</code>", reply_markup=rm)
 
